@@ -78,7 +78,7 @@
 
   (setq org-agenda-span 'day)
 
-  (setq org-agenda-files (quote ("~/git/org")))
+  (setq org-agenda-files (quote ("~/document/org")))
 
   ;; Do not dim blocked tasks
   (setq org-agenda-dim-blocked-tasks nil)
@@ -421,7 +421,7 @@ so change the default 'F' binding in the agenda to allow both"
   (setq org-agenda-skip-scheduled-if-deadline-is-shown  (quote repeated-after-deadline))
 
   (setq org-agenda-include-diary nil)
-  (setq org-agenda-diary-file "~/git/org/diary.org")
+  (setq org-agenda-diary-file "~/document/org/diary.org")
   (setq org-agenda-insert-diary-extract-time t)
 
   ;; Include agenda archive files when searching for things
@@ -432,7 +432,7 @@ so change the default 'F' binding in the agenda to allow both"
   (spacemacs|use-package-add-hook org
     :post-config
     (progn
-      (setq org-default-notes-file "~/git/org/refile.org")
+      (setq org-default-notes-file "~/document/org/refile.org")
 
       (require 'org-id)
       (defun bh/clock-in-task-by-id (id)
@@ -543,26 +543,26 @@ so change the default 'F' binding in the agenda to allow both"
                 ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
                 ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
-  (setq org-directory "~/git/org")
+  (setq org-directory "~/document/org")
 
   ;; Capture templates for: TODO tasks, Notes, appointments, phone calls,
   ;; meetings, and org-protocol
   (setq org-capture-templates
-        (quote (("t" "todo" entry (file "~/git/org/refile.org")
+        (quote (("t" "todo" entry (file "~/document/org/refile.org")
                  "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-                ("r" "respond" entry (file "~/git/org/refile.org")
+                ("r" "respond" entry (file "~/document/org/refile.org")
                  "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-                ("n" "note" entry (file "~/git/org/refile.org")
+                ("n" "note" entry (file "~/document/org/refile.org")
                  "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-                ("j" "Journal" entry (file+datetree "~/git/org/diary.org")
+                ("j" "Journal" entry (file+datetree "~/document/org/diary.org")
                  "* %?\n%U\n" :clock-in t :clock-resume t)
-                ("w" "org-protocol" entry (file "~/git/org/refile.org")
+                ("w" "org-protocol" entry (file "~/document/org/refile.org")
                  "* TODO Review %c\n%U\n" :immediate-finish t)
-                ("m" "Meeting" entry (file "~/git/org/refile.org")
+                ("m" "Meeting" entry (file "~/document/org/refile.org")
                  "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-                ("p" "Phone call" entry (file "~/git/org/refile.org")
+                ("p" "Phone call" entry (file "~/document/org/refile.org")
                  "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
-                ("h" "Habit" entry (file "~/git/org/refile.org")
+                ("h" "Habit" entry (file "~/document/org/refile.org")
                  "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 
   ;; Remove empty LOGBOOK drawers on clock out
@@ -892,7 +892,7 @@ Callers of this function already widen the buffer view."
                     (setq has-next t))))
               (if has-next
                   next-headline
-                nil)) ; a stuck project, has subtasks but no next task
+                nil))           ; a stuck project, has subtasks but no next task
           next-headline))))
 
   (defun bh/skip-non-projects ()
@@ -1056,7 +1056,7 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
                                                   (re-search-forward (concat last-month "\\|" this-month) subtree-end t)))))
                   (if subtree-is-current
                       subtree-end ; Has a date in this month or last month, skip it
-                    nil))  ; available to archive
+                    nil))         ; available to archive
               (or subtree-end (point-max)))
           next-headline))))
 
@@ -1067,8 +1067,8 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
   ;; (require 'ox-latex)
   ;; (require 'ox-ascii)
 
-  (setq org-ditaa-jar-path "~/git/org-mode/contrib/scripts/ditaa.jar")
-  (setq org-plantuml-jar-path "~/java/plantuml.jar")
+  (setq org-ditaa-jar-path "~/.spacemacs.d/ditaa.jar")
+  (setq org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar")
 
   (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
 
@@ -1080,21 +1080,22 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
         (org-display-inline-images)
       (error nil)))
 
-  (org-babel-do-load-languages
-   (quote org-babel-load-languages)
-   (quote ((emacs-lisp . t)
-           (dot . t)
-           (ditaa . t)
-           (R . t)
-           (python . t)
-           (ruby . t)
-           (gnuplot . t)
-           (clojure . t)
-           (sh . t)
-           (ledger . t)
-           (org . t)
-           (plantuml . t)
-           (latex . t))))
+  ;; chenlunhua test
+  ;; (org-babel-do-load-languages
+  ;;  (quote org-babel-load-languages)
+  ;;  (quote ((emacs-lisp . t)
+  ;;          (dot . t)
+  ;;          (ditaa . t)
+  ;;          (R . t)
+  ;;          (python . t)
+  ;;          (ruby . t)
+  ;;          (gnuplot . t)
+  ;;          (clojure . t)
+  ;;          (sh . t)
+  ;;          (ledger . t)
+  ;;          (org . t)
+  ;;          (plantuml . t)
+  ;;          (latex . t))))
 
   ;; Do not prompt to confirm evaluation
   ;; This may be dangerous - make sure you understand the consequences
